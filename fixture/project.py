@@ -58,3 +58,22 @@ class ProjectHelper:
         elif status == "obsolete":
             n = 70
         return n
+
+    def delete_project(self, project_obj):
+        wd = self.app.wd
+        self.open_projects_page()
+        wd.find_element_by_link_text("{}".format(project_obj.project_name)).click()
+        wd.find_element_by_xpath("//input[@value='Delete Project']").click()
+        wd.find_element_by_xpath("//input[@value='Delete Project']").click()
+
+    def delete_project_by_id(self, project_obj):
+        wd = self.app.wd
+        self.open_projects_page()
+        self.select_project_by_id(project_obj)
+        wd.find_element_by_xpath("//input[@value='Delete Project']").click()
+        wd.find_element_by_xpath("//input[@value='Delete Project']").click()
+
+    def select_project_by_id(self, project_obj):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//a[contains(@href, 'manage_proj_edit_page.php?project_id={}')]".format(project_obj.id_project)).click()
+
