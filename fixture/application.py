@@ -10,7 +10,7 @@ from fixture.james import JamesHelper
 
 class Application:
 
-    def __init__(self, browser, base_url):
+    def __init__(self, browser, config):
         """
         Инициализация фикстуры
         """
@@ -27,7 +27,8 @@ class Application:
         self.session = SessionHelper(self)
         self.project = ProjectHelper(self)
         self.james = JamesHelper(self)
-        self.base_url = base_url
+        self.config = config
+        self.base_url = config['web']['baseUrl']
 
     def open_home_page(self):
         wd = self.wd

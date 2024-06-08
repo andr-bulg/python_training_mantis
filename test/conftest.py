@@ -23,18 +23,18 @@ def load_config(file):
     return target
 
 @pytest.fixture
-def app(request):
+def app(request, config):
     """
     Функция, которая создаёт фикстуру и выполняет логин
     :param request: специальный параметр
+    :param config: загружаемая конфигурация
     :return: фикстура (объект класса Application)
     """
     global fixture
     browser = request.config.getoption("--browser")
-    web_config = load_config(request.config.getoption("--target"))['webadmin']
-    web_url = load_config(request.config.getoption("--target"))['web']
+    web_config = config['webadmin']
     if fixture is None or not fixture.is_valid():
-        fixture = Application(browser=browser, base_url=web_url["baseUrl"])
+        fixture = Application(browser=browser, config=config)
     fixture.session.ensure_login(username=web_config["username"], password=web_config["password"])
     return fixture
 
