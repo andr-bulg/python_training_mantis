@@ -9,6 +9,7 @@ from fixture.project import ProjectHelper
 from fixture.james import JamesHelper
 from fixture.signup import SignupHelper
 from fixture.mail import MailHelper
+from fixture.soap import SoapHelper
 
 class Application:
 
@@ -32,6 +33,7 @@ class Application:
         self.config = config
         self.signup = SignupHelper(self)
         self.mail = MailHelper(self)
+        self.soap = SoapHelper(self)
         self.base_url = config['web']['baseUrl']
 
     def open_home_page(self):
