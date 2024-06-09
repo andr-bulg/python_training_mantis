@@ -6,5 +6,5 @@ def test_login(app):
 def test_login_soap(app):
     app.session.logout()
     app.session.login("user_GTqtKHTSRx", "test")
-    assert app.soap.can_login("user_GTqtKHTSRx", "test8")
+    assert app.soap.can_login("user_GTqtKHTSRx", "test")
 
