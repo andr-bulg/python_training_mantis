@@ -3,7 +3,7 @@ from model.project import Project
 
 def test_add_project(app, db):
     old_projects = db.get_project_list()
-    some_project = Project(project_name=app.project.random_name(10),
+    some_project = Project(project_name=app.project.random_name("project_", 10),
                                view_status="public",
                                status="development",
                                description="Some text about project")
@@ -14,9 +14,9 @@ def test_add_project(app, db):
 
 def test_add_project_check_by_soap(app):
     old_projects = app.soap.get_project_list_soap("administrator", "root")
-    some_project = Project(project_name=app.project.random_name(10),
-                            view_status="public",
-                            status="development",
+    some_project = Project(project_name=app.project.random_name("project_", 10),
+                            view_status="private",
+                            status="stable",
                             description="Some text about project")
     app.project.create(some_project)
     new_projects = app.soap.get_project_list_soap("administrator", "root")

@@ -29,7 +29,9 @@ class ProjectHelper:
         wd.find_element_by_name("name").clear()
         wd.find_element_by_name("name").send_keys(project_obj.project_name)
         wd.find_element_by_name("status").click()
-        Select(wd.find_element_by_name("status")).select_by_visible_text(project_obj.status)
+        # первый способ выбора значения из поля со списком через Select
+        # Select(wd.find_element_by_name("status")).select_by_visible_text(project_obj.status)
+        # второй способ выбора значения из поля со списком через xpath
         n = self.get_status(project_obj.status)
         wd.find_element_by_xpath("//option[@value='{}']".format(n)).click()
         wd.find_element_by_name("view_state").click()
@@ -40,9 +42,9 @@ class ProjectHelper:
         wd.find_element_by_name("description").send_keys(project_obj.description)
 
     @staticmethod
-    def random_name(maxlen):
+    def random_name(prefix, maxlen):
         symbols = string.ascii_letters + string.digits
-        return "".join([random.choice(symbols) for i in range(maxlen)])
+        return prefix + "".join([random.choice(symbols) for i in range(maxlen)])
 
     @staticmethod
     def get_view_status(view_status):
